@@ -1,0 +1,26 @@
+.container {
+
+    height: 50px;
+   opacity: 60%;
+   display: flex;
+  
+   align-items: center;
+  
+   justify-content:space-between ;
+  
+}
+.imgwrap{
+
+    height : 30px;
+    width: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+
+.imgcont {
+    display: flex;
+    gap :10px
+}
+
+
