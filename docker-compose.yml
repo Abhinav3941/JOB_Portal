@@ -1,33 +1,26 @@
+version: "3.8"
 services:
-  backend:
+  job_portal:
     build:
-      context: ./backend
+      context: .
+      dockerfile: Dockerfile # The Dockerfile in the root directory
     ports:
-      - "8000:8000"
+      - "8000:8000" # Backend API port
     env_file:
-      - ./backend/.env
+      - ./backend/.env # Backend environment variables
     volumes:
-      - ./backend:/app
+      - ./backend:/backend # Only mount the backend folder
+      - ./frontend:/frontend # Only mount the frontend folder if needed # Optional: Mounts the entire project into the container
     depends_on:
       - mongodb
-
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend:/app
-    stdin_open: true
 
   mongodb:
     image: mongo:latest
     container_name: mongodb
     ports:
-      - "27017:27017"
+      - "27017:27017" # MongoDB port
     volumes:
       - mongo-data:/data/db
 
 volumes:
   mongo-data:
-

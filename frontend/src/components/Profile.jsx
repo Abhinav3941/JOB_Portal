@@ -3,12 +3,13 @@ import Navbar from './shared/Navbar'
 import { Button } from './ui/button'
 import { Avatar, AvatarImage } from '@radix-ui/react-avatar'
 import {  Contact, Mail, Pen } from 'lucide-react'
-import { Badge } from './ui/badge'
+
 import { Label } from '@radix-ui/react-label'
 import AppliedJobtbl from './AppliedJobtbl'
 import UpdateProfileDialog from './UpdateProfileDialog'
 import { useSelector } from 'react-redux'
 import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
+import { Badge } from './ui/Badge'
 
 
 const Profile = () => {

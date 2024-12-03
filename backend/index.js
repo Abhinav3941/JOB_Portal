@@ -1,4 +1,8 @@
 import express from "express"
+import path from "path"; // Add this line
+import { fileURLToPath } from 'url'; // Import fileURLToPath
+import { dirname } from 'path'; // Import dirname
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -9,11 +13,14 @@ import jobRoute from "./routes/job.route.js"
 import applicationRoute from "./routes/application.route.js"
 dotenv.config({});
 
+
+const __filename = fileURLToPath(import.meta.url); // Get the current file's URL
+const __dirname = dirname(__filename);
 const app = express();
 
 
 app.use(express.json());
-app.use(express.urlencoded({extendend:true}));
+app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const corsOptions = {
@@ -27,8 +34,13 @@ app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
 
+// Serve static files from the 'frontend' directory
+app.use(express.static(path.join(__dirname, 'public'))); // Adjust this if necessary
 
-
+// Serve index.html at the root route
+app.get('/', (req, res) => {
+    res.sendFile('index.html', { root: path.join(__dirname, 'public') }); // Adjust this if necessary
+});
 
 //apis
 
