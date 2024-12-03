@@ -24,17 +24,30 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const corsOptions = {
-    origin:[ 
-        'http://localhost:5173',            // Local development
-        'https://job-portal-4o0v.onrender.com',
-    ] ,
-    
-    // Allow requests from this origin
-    credentials: true,                // Allow credentials (cookies, authorization headers, etc.)
-    // You can add more options here if needed
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            'http://localhost:5173', // Local development
+            'https://job-portal-4o0v.onrender.com', // Deployed frontend
+        ];
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
 };
 
 app.use(cors(corsOptions));
+
+app.options('*', (req, res) => {
+    res.header("Access-Control-Allow-Origin", req.headers.origin || '*');
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.sendStatus(200); // Respond with a success for OPTIONS
+});
+
 
 
 const PORT = process.env.PORT || 3000;
