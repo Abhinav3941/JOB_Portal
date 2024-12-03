@@ -1,12 +1,12 @@
 import React from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from './ui/table'
 import { Badge } from './ui/Badge'
-import useGetAppliedJobs from '@/hooks/useGetAppliedJobs';
+
 import { useSelector } from 'react-redux';
 
 const AppliedJobtbl = () => {
 
- const {allAppliedJobs} = useSelector(store=>store.job);
+    const { allAppliedJobs = [] } = useSelector(store => store.job || {});
   return (
     <div>
           <Table>
