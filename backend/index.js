@@ -24,7 +24,12 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Allow requests from this origin
+    origin:[ 
+        'http://localhost:5173',            // Local development
+        'https://job-portal-4o0v.onrender.com',
+    ] ,
+    
+    // Allow requests from this origin
     credentials: true,                // Allow credentials (cookies, authorization headers, etc.)
     // You can add more options here if needed
 };
