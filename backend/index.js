@@ -51,7 +51,7 @@ app.options('*', (req, res) => {
 
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 // Serve static files from the 'frontend' directory
 app.use(express.static(path.join(__dirname, 'public'))); // Adjust this if necessary
@@ -65,7 +65,7 @@ app.get('/', (req, res) => {
 
 app.use("/api/v1/user" , userRoute);
 app.use("/api/v1/company" , companyRoute);
-app.use("/api/v1/Job" , jobRoute);
+app.use("/api/v1/job" , jobRoute);
 app.use("/api/v1/application" , applicationRoute);
 
 
