@@ -32,6 +32,7 @@ const corsOptions = {
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
+            console.error(`CORS error: Origin ${origin} is not allowed`);
             callback(new Error('Not allowed by CORS'));
         }
     },
@@ -45,7 +46,7 @@ app.options('*', (req, res) => {
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.sendStatus(200); // Respond with a success for OPTIONS
+    res.sendStatus(200); 
 });
 
 
@@ -66,9 +67,7 @@ app.use("/api/v1/user" , userRoute);
 app.use("/api/v1/company" , companyRoute);
 app.use("/api/v1/Job" , jobRoute);
 app.use("/api/v1/application" , applicationRoute);
-// "http://localhost:8000/api/v1/user/register"
-// "http://localhost:8000/api/v1/user/login"
-// "http://localhost:8000/api/v1/user/profile/updateProfile"
+
 
 app.listen(PORT , ()=>{
     connectdb();
