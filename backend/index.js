@@ -16,6 +16,8 @@ import applicationRoute from "./routes/application.route.js"
 dotenv.config({ path: './.env' }); // Add this line
 
 
+
+
 const __filename = fileURLToPath(import.meta.url); // Get the current file's URL
 const __dirname = dirname(__filename);
 const app = express();
@@ -55,11 +57,21 @@ app.options('*', (req, res) => {
 
 const PORT = process.env.PORT || 8000;
 
+// Serve static frontend build files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Serve index.html for all unmatched routes
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+});
+
+
+
 
 // Serve index.html at the root route
-app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: path.join(__dirname, 'public') }); // Adjust this if necessary
-});
+// app.get('/', (req, res) => {
+//     res.sendFile('index.html', { root: path.join(__dirname, 'public') }); // Adjust this if necessary
+// });
 
 //apis
 
