@@ -61,17 +61,17 @@ const PORT = process.env.PORT || 8000;
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve index.html for all unmatched routes
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'index.html'));
+// });
 
 
 
 
 // Serve index.html at the root route
-// app.get('/', (req, res) => {
-//     res.sendFile('index.html', { root: path.join(__dirname, 'public') }); // Adjust this if necessary
-// });
+app.get('/', (req, res) => {
+    res.sendFile('index.html', { root: path.join(__dirname, 'public') }); // Adjust this if necessary
+});
 
 //apis
 

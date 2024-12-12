@@ -22,6 +22,12 @@ RUN npm rebuild bcrypt --build-from-source
 # Copy frontend build to backend (e.g., to serve with Express)
 COPY --from=frontend-builder /frontend/dist ./public
 COPY --from=frontend-builder /frontend/index.html ./
+
+
+# Copy .env to the container
+COPY backend/.env ./
+
+
 # Expose backend port
 EXPOSE 8000
 EXPOSE 3000
