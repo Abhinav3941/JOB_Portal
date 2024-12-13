@@ -83,7 +83,7 @@ export const login = async (req, res) => {
         const correctpassword = await bcrypt.compare(password, user.password);
         if (!correctpassword) {
             return res.status(400).json({
-                message: "Email not found",
+                message: "Incorrect Password",
                 success: false,
             })
         };

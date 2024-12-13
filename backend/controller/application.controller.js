@@ -111,27 +111,37 @@ export const getApplicants = async (req, res) => {
                 path: 'applicant',
                 options: { sort: { createdAt: -1 } },
             }
-        })
+        });
 
         if (!job) {
             return res.status(404).json({
                 message: "Job not found",
-                success:false
-            })
+                success: false
+            });
         }
 
+        if (job.applications.length === 0) {
+            return res.status(200).json({
+                message: "No applicants found for this job.",
+                success: true,
+                job: job
+            });
+        }
 
         return res.status(200).json({
-            message: "job found",
-            job: job, 
-            succees:true
-        })
+            message: "Job found",
+            job: job,
+            success: true
+        });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        return res.status(500).json({
+            message: "An error occurred while processing your request.",
+            success: false
+        });
     }
 }
-
 export const updatestatus = async (req, res) => {
     try {
         const { status } = req.body;

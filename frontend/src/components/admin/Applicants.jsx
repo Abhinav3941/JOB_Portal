@@ -26,16 +26,20 @@ const Applicants = () => {
             }
         }
         fetchAllApplicants();
-    }, []);
+    }, [dispatch, params.id]);
     return (
         <div>
             <Navbar />
             <div className='max-w-7xl mx-auto'>
                 <h1 className='font-bold text-xl my-5'>Applicants {applicants?.applications?.length}</h1>
-                <ApplicantsTable />
+                {applicants?.applications?.length === 0 ? (
+                    <p className='text-gray-500'>No applicants found for this job.</p>
+                ) : (
+                    <ApplicantsTable />
+                )}
             </div>
         </div>
-    )
+    );
 }
 
 export default Applicants
