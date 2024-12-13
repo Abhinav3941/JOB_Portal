@@ -12,7 +12,7 @@ const Applicants = () => {
     const dispatch = useDispatch();
     const {applicants} = useSelector(store=>store.application);
         
-    console.log(applicants.applications.length);
+    console.log(applicants?.applications?.length || 0) ; 
     
     useEffect(() => {
         const fetchAllApplicants = async () => {
